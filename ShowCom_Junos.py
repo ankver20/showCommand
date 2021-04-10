@@ -1,10 +1,10 @@
 # History
 # 22 Feb 2020 : ArgParser added
 # 23 Feb 2020 : Try and Except added under for loop, so that if SSH fail one device, script should continue
-
+# 09 Feb 2021 : Juniper
 
 # show config on Cisco devices
-# device IP is taken from ShInvDevice.txt or via command line
+# device IP is taken from ShInDevice.txt or via command line
 # commands taken from showCommands.txt or via command line
 
 
@@ -18,11 +18,11 @@ import logging
 import os
 
 if __name__ == '__main__':
-    #logging.basicConfig(level=logging.DEBUG)
-    # Cisco username & PW for BLR Lab
-    username = 'averma2'
-    pw = 'Ank#2020'
-    deviceType = 'cisco_xr'
+    # logging.basicConfig(level=logging.DEBUG)
+    # Juniper username & PW for BLR Lab
+    username = 'lab'
+    pw = 'lab123'
+    deviceType = 'juniper'
     port = '22'
 
     # user need to input device ips and show commands via command line
@@ -57,7 +57,7 @@ def show_command():
     for i in range(len(deviceIP)):
         dp = deviceIP[i]
         try:
-            ssh_cisco(dp, sh_commands)
+            ssh_juniper(dp, sh_commands)
 
         except Exception as e:
             c = str(e)
@@ -67,10 +67,9 @@ def show_command():
             time.sleep(0.5)
 
 
-def ssh_cisco(dp, sh_commands):
+def ssh_juniper(dp, sh_commands):
     net_connect = ConnectHandler(device_type=deviceType, ip=dp, username=username, password=pw, port=port)
-    output = net_connect.send_command_expect('ter len 0', delay_factor=5)  # added delay_factor as it was getting time out
-
+    
     for j in range(len(sh_commands)):
         command = sh_commands[j]
         prompt = net_connect.find_prompt()
@@ -79,7 +78,7 @@ def ssh_cisco(dp, sh_commands):
 
         print(str(prompt) + command)
 
-        output1 = net_connect.send_command_expect(command, delay_factor=5)
+        output1 = net_connect.send_command(command, delay_factor=5)
         time.sleep(1)
 
         print(output1 + '\n---- end ---\n')
@@ -119,6 +118,7 @@ def CommandList():
     # f = open('C:\COLT\Ankit\DOCUMENTS_COLT\COLT-DOC\Scripting\showCommand\showCommands.txt','r')
     f2 = f.readlines()
     return f2
+
 
 
 show_command()

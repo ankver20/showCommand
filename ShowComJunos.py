@@ -3,7 +3,7 @@
 # 23 Feb 2020 : Try and Except added under for loop, so that if SSH fail one device, script should continue
 # 09 Feb 2021 : Juniper
 
-# show config on Cisco devices
+# show config on junos devices
 # device IP is taken from ShInDevice.txt or via command line
 # commands taken from showCommands.txt or via command line
 
@@ -95,8 +95,8 @@ def createLog(c):
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
     LocalTime= strftime("%d%m%Y", gmtime())
-    f = open(file_path + '\\ShowOutput\\showOutput-' + LocalTime + '.txt', 'a')
-    # f = open('C:\COLT\Ankit\DOCUMENTS_COLT\COLT-DOC\Scripting\showCommand\ShowOutput\showOutput-' + LocalTime + '.txt', 'a')
+    # f = open(file_path + '\\showOutput-' + LocalTime + '.txt', 'a')   # For windows
+    f = open(file_path + '/showOutput-' + LocalTime + '.txt', 'a')     # For linux
     f.write(c)
     #f.write('\n\n')
     f.close()
@@ -105,8 +105,8 @@ def createLog(c):
 def DeviceList():
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
-    f = open(file_path + '\\ShInvDevice.txt', 'r')
-    # f = open('ShInvDevice.txt', 'r')
+    # f = open(file_path + '\\ShInvDevice.txt', 'r')  # For windows
+    f = open(file_path + '/hInvDevice.txt', 'r')  # For linux
     f1 = f.readlines()
     return f1
 
@@ -114,8 +114,8 @@ def DeviceList():
 def CommandList():
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
-    f = open(file_path + '\\showCommands.txt', 'r')
-    # f = open('C:\COLT\Ankit\DOCUMENTS_COLT\COLT-DOC\Scripting\showCommand\showCommands.txt','r')
+    # f = open(file_path + '\\showCommands.txt', 'r')     # For windows
+    f = open(file_path + '/showCommands.txt', 'r')     # For linux
     f2 = f.readlines()
     return f2
 

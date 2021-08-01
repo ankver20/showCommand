@@ -21,7 +21,7 @@ if __name__ == '__main__':
     #logging.basicConfig(level=logging.DEBUG)
     # Cisco username & PW for BLR Lab
     username = 'averma2'
-    pw = 'Ank#2020'
+    pw = 'Ank#2021'
     deviceType = 'cisco_xr'
     port = '22'
 
@@ -96,18 +96,17 @@ def createLog(c):
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
     LocalTime= strftime("%d%m%Y", gmtime())
-    f = open(file_path + '\\ShowOutput\\showOutput-' + LocalTime + '.txt', 'a')
-    # f = open('C:\COLT\Ankit\DOCUMENTS_COLT\COLT-DOC\Scripting\showCommand\ShowOutput\showOutput-' + LocalTime + '.txt', 'a')
+    # f = open(file_path + '\\showOutput-' + LocalTime + '.txt', 'a')   # For windows
+    f = open(file_path + '/showOutput-' + LocalTime + '.txt', 'a')      # For linux
     f.write(c)
-    #f.write('\n\n')
     f.close()
 
 # read inventory device details from txt file
 def DeviceList():
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
-    f = open(file_path + '\\ShInvDevice.txt', 'r')
-    # f = open('ShInvDevice.txt', 'r')
+    # f = open(file_path + '\\ShInvDevice.txt', 'r')    # For windows
+    f = open(file_path + '/ShInvDevice.txt', 'r')       # For linux
     f1 = f.readlines()
     return f1
 
@@ -115,8 +114,8 @@ def DeviceList():
 def CommandList():
     file_path = os.path.dirname(os.path.realpath(__file__))
     print(file_path)
-    f = open(file_path + '\\showCommands.txt', 'r')
-    # f = open('C:\COLT\Ankit\DOCUMENTS_COLT\COLT-DOC\Scripting\showCommand\showCommands.txt','r')
+    # f = open(file_path + '\\showCommands.txt', 'r')   # For windows
+    f = open(file_path + '/showCommands.txt', 'r')      # For linux
     f2 = f.readlines()
     return f2
 
